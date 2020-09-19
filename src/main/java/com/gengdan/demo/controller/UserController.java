@@ -26,6 +26,9 @@ public class UserController {
                        @RequestParam("password") String userPassword, Model model){
         String textUserNameValue="pig";
         String testUserPasswordValue="123456";
-        return "";
+        if(userName.equals(textUserNameValue) && userPassword.equals(testUserPasswordValue)){
+            return "loginSuccess";
+        }
+        return "login";
     }
 }

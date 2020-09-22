@@ -1,10 +1,10 @@
 package com.gengdan.demo.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author ShiJiaWei
@@ -13,10 +13,33 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 
 @Controller
+@Api(value = "用户管理", tags = "用户API")
 public class UserController {
 
-    @RequestMapping("login")
+    @ApiOperation(value = "登录测试（POST）", notes = "登录测试（POST）")
+    @RequestMapping(value = "login",method = RequestMethod.POST)
     String showLoginForm(){
+        System.out.println("showLoginForm");
+        return "login";
+    }
+
+    @ApiOperation(value = "登录测试（GET）", notes = "登录测试（GET）")
+    @RequestMapping(value = "login2",method = RequestMethod.GET)
+    String showLoginForm2(){
+        System.out.println("showLoginForm");
+        return "login";
+    }
+
+    @ApiOperation(value = "登录测试（GET）", notes = "登录测试（GET）")
+    @GetMapping("login3")
+    String showLoginForm3(){
+        System.out.println("showLoginForm");
+        return "login";
+    }
+
+    @ApiOperation(value = "登录测试（POST）", notes = "登录测试（POST）")
+    @PostMapping("login4")
+    String showLoginForm4(){
         System.out.println("showLoginForm");
         return "login";
     }
@@ -31,4 +54,6 @@ public class UserController {
         }
         return "login";
     }
+
+
 }

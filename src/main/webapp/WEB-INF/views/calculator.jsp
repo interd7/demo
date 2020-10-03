@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="../submitAction" method="get">
+<form action="../computer/submitAction" method="get">
     <p>第一个数：<label>
         <input type="text" name="first" />
     </label></p>

@@ -24,7 +24,7 @@ public class CalculatorController {
     @GetMapping("submitAction")
     String submitAction(@RequestParam("first") String first,
                         @RequestParam("second") String second,
-                       @RequestParam("operator") String operator, Model model){
+                        @RequestParam("operator") String operator, Model model){
         int result=0;
         int intFirst=Integer.parseInt(first);
         int intSecond=Integer.parseInt(second);

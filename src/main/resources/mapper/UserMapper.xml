@@ -1,10 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gengdan.demo.mapper.UserMapper">
+    <insert id="insertOneUser" parameterType="com.gengdan.demo.entity.MyUser">
+        insert into user(user_name, password, real_name)
+        values (#{myName},#{myPassword},#{myRealName})
+    </insert>
+
+
+    <insert id="insertOneMapUser" parameterType="java.util.HashMap">
+        insert into user(user_name, password, real_name)
+        values (#{key1},#{key2},#{key3})
+    </insert>
 
     <!--根据id查找用户-->
     <select id="selectUserById" resultType="com.gengdan.demo.entity.User">
         select * from user where id=#{id}
     </select>
 
+
+    <!--根据用户名和密码查询用户信息-->
+    <select id="selectUserByUserNameAndPassWord" resultType="com.gengdan.demo.entity.User">
+        select * from user
+        where password=#{password}
+        and user_name=#{userName}
+    </select>
+
+
+
+    <select id="selectHisUserById" resultMap="UserResultMap">
+        select * from user where id=#{id}
+    </select>
+
+    <resultMap id="UserResultMap" type="com.gengdan.demo.entity.HisUser">
+        <id column="id" jdbcType="INTEGER" property="hisId" />
+        <result column="user_name" jdbcType="VARCHAR" property="hisUserName" />
+        <result column="password" jdbcType="VARCHAR" property="hisPassword" />
+        <result column="real_name" jdbcType="VARCHAR" property="hisRealName" />
+    </resultMap>
 </mapper>

@@ -1,5 +1,6 @@
 package com.gengdan.demo.service;
 
+import com.gengdan.demo.entity.MyUser;
 import com.gengdan.demo.entity.User;
 
 import java.util.HashMap;
@@ -13,4 +14,7 @@ import java.util.List;
 public interface UserService {
     User selectUserById(int id);
 
+    int isSelectUserNameExist(String userName);
+
+    int insertOneUser(String userName,String password);
 }

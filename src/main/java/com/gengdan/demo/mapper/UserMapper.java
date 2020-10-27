@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 @Mapper
 @Component
@@ -25,4 +26,18 @@ public interface UserMapper {
     int insertOneMapUser(HashMap hashMap);
 
     HisUser selectHisUserById(@Param("id") int id);
+
+    List<User> selectByUserDynamic(User user);
+
+    List<User> selectByUserChooseDynamic(User user);
+
+    List<User> selectByUserForeachListDynamic(List<Integer> idList);
+
+    List<User> selectByUserForeachArrayDynamic(Integer[] idArray);
+
+    List<User> selectByUserForeachSetDynamic(Set<Integer> idSet);
+
+    List<User> selectByUserByUserName(@Param("userName") String userName);
+
+
 }

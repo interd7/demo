@@ -1,5 +1,6 @@
 package com.gengdan.demo.service.impl;
 
+import com.gengdan.demo.entity.MyUser;
 import com.gengdan.demo.entity.User;
 import com.gengdan.demo.mapper.UserMapper;
 import com.gengdan.demo.service.UserService;
@@ -27,4 +28,23 @@ public class UserServiceImpl implements UserService {
     public User selectUserById(int id) {
         return userMapper.selectUserById(id);
     }
+
+    @Override
+    public int isSelectUserNameExist(String userName) {
+        List<User> isExist=userMapper.selectByUserByUserName(userName);
+        if(isExist.isEmpty()){
+            return 0;
+        }
+        return 1;
+    }
+
+    @Override
+    public int insertOneUser(String userName, String password) {
+        MyUser myUser=new MyUser();
+        myUser.setMyName(userName);
+        myUser.setMyPassword(password);
+        int isInsert=userMapper.insertOneUser(myUser);
+        return isInsert;
+    }
+
 }

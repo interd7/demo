@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * @author ShiJiaWei
+ * @author duanyimai
  * @version 1.0
- * @date 2020/10/27 09:25
+ * @date 2020/10/27 09:55
  */
 @SpringBootTest
 public class AccountText {

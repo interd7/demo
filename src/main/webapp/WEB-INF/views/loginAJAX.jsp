@@ -17,8 +17,12 @@
 <%--    --%>
 <%--</form>--%>
 <div>
-    <a>查询结果</a>
+    <a>用户名</a>
     <input type="text" id="message">
+</div>
+<div>
+    <a>真实姓名</a>
+    <input type="text" id="realname">
 </div>
 <div>
     <a>请输入id</a>
@@ -30,10 +34,12 @@
         let username = $("#username").val();
         let password = $("#password").val();
         let id = $("#id").val();
+        let realname = $("#realname").val();
         let myData = {
             "username":username,
             "password":password,
-            "id":id
+            "id":id,
+            "realname":realname
         };
         $.ajax({
             type:"POST",
@@ -46,7 +52,7 @@
                 alert(result["selectedRows"]);
                 alert('id：'+result["selectedIds"]);
                 $("#message").val(result["selectedResult"])
-
+                $("#realname").val(result["realname"])
             },
             error:function (){
                 alert("异常！")

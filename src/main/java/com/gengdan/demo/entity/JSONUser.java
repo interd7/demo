@@ -8,11 +8,13 @@ public class JSONUser {
     private String username;
     private String password;
     private String id;
+    private String realname;
 
-    public JSONUser(String username,String password,String id){
+    public JSONUser(String username, String password, String id, String realname){
         this.username = username;
         this.password = password;
         this.id = id;
+        this.realname = realname;
     }
 
     public String getUsername() {
@@ -39,5 +41,13 @@ public class JSONUser {
         this.id = id;
     }
 
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
 
 }

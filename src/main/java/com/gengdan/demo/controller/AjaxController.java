@@ -1,6 +1,7 @@
 package com.gengdan.demo.controller;
 
 import com.gengdan.demo.entity.JSONUser;
+import com.gengdan.demo.mapper.JSONUserMapper;
 import com.gengdan.demo.service.JSONUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +23,16 @@ public class AjaxController {
         System.out.println("userName="+ jsonUser.getUsername());
         System.out.println("userPassword=" +jsonUser.getPassword());
         System.out.println("id="+jsonUser.getId());
+        System.out.println(("realname="+jsonUser.getRealname()));
         Map<String,String> selectedMap = new HashMap<>();
         if (jsonUserService.selectUserById(jsonUser.getId()) != null){
-            System.out.println("该ID存在用户");
-            selectedMap.put("selectedResult","该ID已存在用户");
+            JSONUser userList = jsonUserService.selectUserById(jsonUser.getId());
+            String username = userList.getUsername();
+            String realname = userList.getRealname();
+            System.out.println(username);
+            System.out.println(realname);
+            selectedMap.put("selectedResult",username);
+            selectedMap.put("realname",realname);
         }else {
             System.out.println("该ID不存在用户");
             selectedMap.put("selectedResult","该ID不存在用户");

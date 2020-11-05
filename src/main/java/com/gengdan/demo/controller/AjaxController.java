@@ -1,6 +1,7 @@
 package com.gengdan.demo.controller;
 
 import com.gengdan.demo.entity.JSONUser;
+import com.gengdan.demo.service.JSONUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
@@ -13,14 +14,26 @@ import java.util.Map;
 @Controller
 @RequestMapping("user")
 public class AjaxController {
+    private final JSONUserService jsonUserService;
+    public AjaxController(JSONUserService jsonUserService){this.jsonUserService = jsonUserService;}
     @RequestMapping(value = "loginActionAJAXJSON",method = RequestMethod.POST)
     @ResponseBody
     public Map<String,String> loginActionAJAXJSON(@RequestBody JSONUser jsonUser){
         System.out.println("userName="+ jsonUser.getUsername());
         System.out.println("userPassword=" +jsonUser.getPassword());
+        System.out.println("id="+jsonUser.getId());
         Map<String,String> selectedMap = new HashMap<>();
-        selectedMap.put("selectedResult", jsonUser.getUsername());
-        selectedMap.put("selectedRows",jsonUser.getPassword());
+        if (jsonUserService.selectUserById(jsonUser.getId()) != null){
+            System.out.println("该ID存在用户");
+            selectedMap.put("selectedResult","该ID已存在用户");
+        }else {
+            System.out.println("该ID不存在用户");
+            selectedMap.put("selectedResult","该ID不存在用户");
+        }
+
+        selectedMap.put("selectedRows","你真棒");
+        selectedMap.put("selectedIds",jsonUser.getId());
+
         return selectedMap;
     }
 //    @RequestMapping(value = "loginActionAJAXSomeJSON",method = RequestMethod.POST)

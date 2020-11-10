@@ -13,11 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @author ShiJiaWei
- * @version 1.0
- * @date 2020/10/20 09:43
- */
 @SpringBootTest
 public class TextMybatisDemo04 {
     @Autowired

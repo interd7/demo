@@ -96,6 +96,9 @@
     <select id="selectByUserByUserName" resultType="com.gengdan.demo.entity.User" parameterType="String">
         select * from user where user_name=#{userName}
     </select>
+    <select id="findAllUser" resultType="com.gengdan.demo.entity.User">
+        select * from user
+    </select>
 
 
     <resultMap id="UserResultMap" type="com.gengdan.demo.entity.HisUser">

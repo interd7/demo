@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * @author ShiJiaWei
+ * @author DuanYimai
  * @version 1.0
  * @date 2020/10/6 10:36
  */
@@ -46,5 +46,8 @@ public class UserServiceImpl implements UserService {
         int isInsert=userMapper.insertOneUser(myUser);
         return isInsert;
     }
-
+    @Override
+    public List<User> findAllUser(){
+        return userMapper.findAllUser();
+    }
 }

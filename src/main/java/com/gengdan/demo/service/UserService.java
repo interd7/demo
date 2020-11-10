@@ -17,4 +17,6 @@ public interface UserService {
     int isSelectUserNameExist(String userName);
 
     int insertOneUser(String userName,String password);
+
+    List<User> findAllUser();
 }

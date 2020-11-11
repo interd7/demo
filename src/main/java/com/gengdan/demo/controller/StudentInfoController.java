@@ -5,10 +5,8 @@ import com.gengdan.demo.entity.Stu;
 import com.gengdan.demo.service.StudentService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
@@ -37,5 +35,10 @@ public class StudentInfoController {
         List<Stu> all = studentService.findAllStudent();
         PageInfo<Stu> studentinfo = new PageInfo(all);
         return studentinfo;
+    }
+    @GetMapping("ShowStudentInfo")
+    String showPage(){
+        System.out.println("showStudentInfo");
+        return "showStudentInfoJSON";
     }
 }

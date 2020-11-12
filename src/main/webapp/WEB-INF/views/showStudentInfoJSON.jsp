@@ -52,13 +52,18 @@
 <%--            </tr>--%>
 <%--        </c:forEach>--%>
     </table>
-<textarea id="textareaForStudent"></textarea>
+<%--<textarea id="textareaForStudent"></textarea>--%>
 <p>当前<span id="currentPage"></span>页，总<span id="totalPages"></span>页，共<span id="totalRecorders"></span>条记录</p >
 <a href="#" onclick="myShowFirstPage()">首页</a >
 <a href="#" onclick="myShowPreviousPage()">上一页</a >
 <a href="#" onclick="myShowNextPage()">下一页</a >
 <a href="#" onclick="myShowLastPage()">尾页</a >
+    <form id="input1">
+        本页显示几条数据：<input type="text" name="dataNum">
+        <input type="submit" value="提交">
+    </form>
 </div>
+
 </body>
 <script>
     var totalPages=0;
@@ -99,25 +104,29 @@
         myShowCurrentPage(pageInfo);
     }
 
-    function myShowCurrentPage(pageinfo) {
+    function myShowCurrentPage(pageInfo) {
         $.ajax({
             type:"POST",
             contentType:"application/json",
             dataType:"json",
             url:"/student/myStudentInfo",
-            data:JSON.stringify(pageinfo),
+            data:JSON.stringify(pageInfo),
             success:function (result) {
 
                 //将数据显示在页面上
                 var str = " ";
-                // str +="<table><thead><tr><th>id</th><th>name</th><th>sex</th><th>age</th><th>home</th><th>major</th></tr></thead><tbody>";
+
                 //遍历数据
-                $.each(result,function(index,element){
-                    str +="<tr><td>"+element['id']+"</td><td>"+element['name']+"</td><td>"+element['sex']+"</td><td>"+element['age']+"</td><td>"+element['home']+"</td><td>"+element['major']+"</td></tr>";
-                })
-//遍历完成之后
+                // $.each(result,function(index,element){
+                    let contentSet = result.list;
+                    for(let i=0;i<contentSet.length;i++) {
+                        let oneStudent = contentSet[i];
+                        str += "<tr><td>" + oneStudent.id + "</td><td>" + oneStudent.name + "</td><td>" + oneStudent.sex + "</td><td>" + oneStudent.age + "</td><td>" + oneStudent.home + "</td><td>" + oneStudent.major + "</td></tr>";
+                    }
+                // })
+                //遍历完成之后
                 str +="</tbody></table>";
-//将表格添加到body中
+                //将表格添加到body中
                 $('#tabletest').append(str);
 
                 var contentStr="";
@@ -138,7 +147,7 @@
                     contentStr=contentStr.concat("\n");
                 }
                 $("#textareaForStudent").val(contentStr);
-                $("#tabletest").val(contentStr);
+                // $("#tabletest").val(contentStr);
                 $("#currentPage").html(result.pageNum);
                 $("#totalPages").html(result.pages);
                 $("#totalRecorders").html(result.total);
@@ -152,12 +161,16 @@
         })
     }
     $(function (){
+        var x = document.getElementById("input1");
         let pageInfo = {
             "pageSize" : 4,
             "pageNumber" : 1
         };
         $("#textareaForUser").attr('rows',pageInfo.pageSize);
         $("#textareaForUser").attr('cols','80');
+        console.log(x.elements[0].value)
+        // $("#tabletest").attr('rows',pageInfo.pageSize)
+        // $("#tabletest").attr('cols','80')
         myShowCurrentPage(pageInfo);
     })
 </script>
